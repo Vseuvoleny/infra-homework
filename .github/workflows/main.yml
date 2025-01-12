@@ -1,0 +1,40 @@
+name: test
+
+on: push
+
+jobs:
+  dependencies:
+  runs-on: ubuntu-latest
+  steps: 
+    - uses: checkout@v4
+    - uses: setup-node@v4
+    - name: dependencies install
+      run: yarn
+
+  build:
+  needs: dependencies
+  runs-on: ubuntu-latest
+  steps: 
+    - uses: checkout@v4
+    - uses: setup-node@v4
+    - name: build install
+      run: yarn build
+
+  lint:
+  needs: dependencies
+  runs-on: ubuntu-latest
+  steps: 
+    - uses: checkout@v4
+    - uses: setup-node@v4
+    - name: Lint project
+      run: yarn lint
+
+  deploy:
+  needs: [dependencies, build]
+  runs-on: ubuntu-latest
+  steps: 
+    - uses: checkout@v4
+    - uses: setup-node@v4
+    - name: Deploy porject
+      run: yarn deploy     
+    
