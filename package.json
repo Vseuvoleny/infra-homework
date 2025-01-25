@@ -14,6 +14,7 @@
     "test:docker": "node test/docker.js",
     "test:kuber": "node test/kuber.js",
     "test:cdp": "node test/cdp.js",
+    "test:deploy": "node test/deploy.js",
     "build": "webpack --mode=development && echo 'Build completed'",
     "linters": "eslint ./src && echo 'Linters completed'",
     "deploy": "echo deploy && echo 'Deploy completed'"
