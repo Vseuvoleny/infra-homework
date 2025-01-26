@@ -20,7 +20,7 @@ jobs:
         
   build:
       runs-on: ubuntu-latest
-      needs: ['dependencies']
+      needs: dependencies
       steps:
         - name: Checkout
           uses: actions/checkout@v4
@@ -38,9 +38,9 @@ jobs:
           run: yarn build
    
 
-  lint:
+  linters:
       runs-on: ubuntu-latest
-      needs: ['dependencies']
+      needs: dependencies
       steps:
         - name: Checkout
           uses: actions/checkout@v4
@@ -56,7 +56,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: ['dependencies','build']
+    needs: [dependencies,build]
     steps:
         - name: Checkout
           uses: actions/checkout@v4
