@@ -1,0 +1,37 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+      
+  jobs:
+  dependecies:
+    runs-on: ubuntu-latest
+    - uses: actions/checkout@v4
+    - uses: setup-node
+        run: yarn
+        
+    build:
+      runs-on: ubuntu-latest
+    - uses: actions/checkout@v4
+    - uses: setup-node
+       run: yarn build
+    needs:['dependencies']
+
+    lint:
+      runs-on: ubuntu-latest
+    - uses: actions/checkout@v4
+    - uses: setup-node
+      run: yarn lint
+    needs:['dependencies']  
+
+    deploy:
+      runs-on: ubuntu-latest
+    - uses: actions/checkout@v4
+    - uses: setup-node
+       run: yarn deploy
+    needs:['dependencies', "build"]  
+        
+  
+
