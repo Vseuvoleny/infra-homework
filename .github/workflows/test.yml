@@ -2,36 +2,70 @@ name: test
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
       
   jobs:
   dependecies:
     runs-on: ubuntu-latest
-    - uses: actions/checkout@v4
-    - uses: setup-node
-        run: yarn
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup node
+      uses: actions/setup-node@v4
+      with: 
+          node-version: '22'
+          cache: 'yarn'
+    - name: Install
+      run: yarn
         
     build:
       runs-on: ubuntu-latest
-    - uses: actions/checkout@v4
-    - uses: setup-node
-       run: yarn build
-    needs:['dependencies']
+      needs: ['dependencies']
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        - name: Setup node
+          uses: actions/setup-node@v4
+          with: 
+            node-version: '22'
+            cache: 'yarn'
+        - name: Install
+          run: yarn
+        - name: Build
+          run: yarn build
+   
 
     lint:
       runs-on: ubuntu-latest
-    - uses: actions/checkout@v4
-    - uses: setup-node
-      run: yarn lint
-    needs:['dependencies']  
+      needs: ['dependencies']
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        - name: Setup node
+          uses: actions/setup-node@v4
+          with: 
+            node-version: '22'
+            cache: 'yarn'
+        - name: Install
+          run: yarn
+        - name: Lint
+          run: yarn lint 
 
     deploy:
       runs-on: ubuntu-latest
-    - uses: actions/checkout@v4
-    - uses: setup-node
-       run: yarn deploy
-    needs:['dependencies', "build"]  
+      needs: ['dependencies','build']
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        - name: Setup node
+          uses: actions/setup-node@v4
+          with: 
+            node-version: '22'
+            cache: 'yarn'
+        - name: Install
+          run: yarn
+        - name: Deploy
+          run: yarn deploy 
         
   
 
